@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmaziel Online - Tu Botica de Confianza</title>
+
+    <meta name="description" content="Compra tus medicamentos y productos de farmacia en línea con Farmaziel Online. Tu botica de confianza con recojo en tienda.">
+    <meta name="keywords" content="farmacia online, botica, medicamentos, salud, Farmaziel, recojo en tienda">
+    <meta name="author" content="Farmaziel Online">
+    
+    <!-- Icono -->
+    <link rel="icon" href="/assets/icon/icon.png" type="image/png">
+
+    <!-- Open Graph (Para compartir en redes sociales) -->
+    <meta property="og:title" content="Farmaziel Online - Tu Botica de Confianza">
+    <meta property="og:description" content="Compra fácil y rápido tus medicamentos en línea. Farmaziel Online te ofrece una experiencia segura y confiable.">
+    <meta property="og:image" content="./assets/icon/image.png"> <!-- Asegúrate de tener este archivo en tu servidor -->
+    <meta property="og:url" content="https://www.farmaziel.vercel.app">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Farmaziel Online - Tu Botica de Confianza">
+    <meta name="twitter:description" content="Compra fácil y rápido tus medicamentos en línea. Farmaziel Online te ofrece una experiencia segura y confiable.">
+    <meta name="twitter:image" content="portada.jpg">
+
+
+    <script src="https://kit.fontawesome.com/0aa76cd1df.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <script type="module" src="./src/js/script.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f0f7f9, #ffffff);
+            color: #1a3c34;
+            line-height: 1.6;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0);
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="glass-effect py-4 px-8 flex justify-between items-center fixed top-0 w-full z-50">
+        <!-- Logo -->
+        <h1 class="text-3xl font-bold text-white flex items-center">
+            <i class="fas fa-heartbeat mr-3 text-white animate-pulse transition-colors duration-1000 group-hover:text-red-500"></i> 
+            Farmaziel Online
+        </h1>
+        <!-- Menú de Navegación -->
+        <nav class="hidden md:flex">
+            <ul class="flex space-x-8 text-lg font-medium">
+                <li><a href="index.html" class="text-white hover:text-teal-500 transition-colors flex items-center">
+                    <i class="fas fa-home mr-2"></i> Inicio</a></li>
+                <li><a href="tienda.html" class="text-white hover:text-teal-500 transition-colors flex items-center">
+                    <i class="fas fa-shopping-bag mr-2"></i> Tienda</a></li>
+                <li><a href="#servicios" class="text-white hover:text-teal-500 transition-colors flex items-center">
+                    <i class="fas fa-concierge-bell mr-2"></i> Servicios</a></li>
+                <li><a href="https://wa.me/51918026576" class="text-white hover:text-teal-500 transition-colors flex items-center">
+                    <i class="fas fa-envelope mr-2"></i> Contacto</a></li>
+            </ul>
+        </nav>
+        <!-- Botón del menú hamburguesa -->
+        <button id="menu-toggle" class="md:hidden text-white text-3xl">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- Menú Responsive -->
+        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-300 bg-white bg-opacity-100 flex flex-col items-center justify-center space-y-6 text-2xl font-medium transform translate-x-full transition-transform duration-300 md:hidden">
+            <button id="close-menu" class="absolute top-6 right-6 text-4xl text-teal-700">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="index.html" class="hover:text-teal-500 flex items-center">
+                <i class="fas fa-home mr-2"></i> Inicio</a>
+            <a href="tienda.html" class="hover:text-teal-500 flex items-center">
+                <i class="fas fa-shopping-bag mr-2"></i> Tienda</a>
+            <a href="#servicios" class="hover:text-teal-500 flex items-center">
+                <i class="fas fa-concierge-bell mr-2"></i> Servicios</a>
+            <a href="#contacto" class="hover:text-teal-500 flex items-center">
+                <i class="fas fa-envelope mr-2"></i> Contacto</a>
+            </div>
+    </header>
+    
+    <style>
+/* Estado inicial: completamente transparente, texto e íconos blancos */
+.glass-effect {
+    background: transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+/* Todos los elementos dentro del header son blancos por defecto */
+.glass-effect h1,
+.glass-effect a,
+.glass-effect button {
+    color: white;
+}
+
+.glass-effect i {
+    color: white;
+}
+
+/* Estado al hacer scroll: fondo blanco, sombra, colores originales */
+.glass-effect.scrolled {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-opaco */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra equivalente a shadow-lg */
+}
+
+/* Restaurar colores originales al hacer scroll */
+.glass-effect.scrolled h1 {
+    color: #2d7a6b; /* text-teal-700 */
+}
+
+.glass-effect.scrolled a,
+.glass-effect.scrolled button {
+    color: #2d7a6b; /* text-teal-700 */
+}
+
+.glass-effect.scrolled i {
+    color: #2d7a6b; /* text-teal-700 para íconos */
+}
+
+/* Mantener el hover en ambos estados */
+.glass-effect a:hover {
+    color: #38b2ac; /* text-teal-500 */
+}
+    </style>
+    
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.remove('translate-x-full');
+    });
+
+    document.getElementById('close-menu').addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.add('translate-x-full');
+    });
+
+    const header = document.querySelector('.glass-effect');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+
+
+<section class="banner-section relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('/font.jpg');">
+    <div class="banner-content p-12 rounded-2xl text-center text-teal-800 max-w-4xl">
+        <h2 class="text-5xl md:text-6xl font-bold" style="text-shadow: 0px 0px 30px #424242d5;">Salud y bienestar a tu alcance</h2>
+        <p class="mt-4 text-xl font-medium text-gray-800 drop-shadow-md">Más de 25 años cuidándote, ahora con la comodidad del mundo digital.</p>
+        <div class="mt-8 flex justify-center space-x-6">
+            <a href="tienda.html" class="banner-btn-teal inline-block bg-teal-500 text-white font-semibold px-10 py-4 rounded-full shadow-md hover:bg-teal-600 transition transform hover:scale-105">
+                Ir a la Tienda
+            </a>
+            <a href="#servicios" class="banner-btn-lime inline-block bg-lime-500 text-white font-semibold px-10 py-4 rounded-full shadow-md hover:bg-lime-600 transition transform hover:scale-105">
+                Conoce Más
+            </a>
+        </div>
+    </div>
+</section>
+
+    
+
+    <section class="py-24 container mx-auto px-6">
+        <h3 class="text-4xl font-bold text-teal-700 text-center mb-12">Lo que nos hace únicos</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="glass-effect p-8 rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <i class="fas fa-truck text-5xl text-teal-500 mb-4" style="color: #0b6fc1;"></i>
+                <h4 class="text-2xl font-semibold">Retiro en minutos</h4>
+                <p class="text-gray-600 mt-2">Pide online y recoge en nuestras sucursales sin esperas.</p>
+            </div>
+            <div class="glass-effect p-8 rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <i class="fas fa-stethoscope text-5xl text-teal-500 mb-4" style="color: #df344b;"></i>
+                <h4 class="text-2xl font-semibold">Asesoría 24/7</h4>
+                <p class="text-gray-600 mt-2">Habla con nuestros farmacéuticos en cualquier momento.</p>
+            </div>
+            <div class="glass-effect p-8 rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-2">
+                <i class="fas fa-leaf text-5xl text-lime-500 mb-4" style="color: #4fbe4c;"></i>
+                <h4 class="text-2xl font-semibold">Productos naturales</h4>
+                <p class="text-gray-600 mt-2">Opciones ecológicas para tu salud y bienestar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-teal-50 text-center">
+        <h3 class="text-4xl font-bold text-teal-700 mb-8">Más de 24 años de experiencia</h3>
+        <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-10">Desde 2001, Farmaziel ha sido el aliado de miles de familias, combinando tradición con innovación para ofrecerte lo mejor en salud.</p>
+        <div class="flex justify-center space-x-12">
+            <div>
+                <span class="text-5xl font-bold text-lime-500">50K+</span>
+                <p class="text-gray-600">Ventas Realizadas</p>
+            </div>
+            <div>
+                <span class="text-5xl font-bold text-teal-500">25+</span>
+                <p class="text-gray-600">Años en el mercado</p>
+            </div>
+           
+        </div>
+    </section>
+    
+
+    <section id="servicios" class="py-24 container mx-auto px-6">
+        <h3 class="text-4xl font-bold text-blue-700 text-center mb-12">Nuestros Servicios</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Tarjeta 1 - Farmacia Online -->
+            <div class="glass-card flex items-center p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white/30 backdrop-blur-md border border-blue-300">
+                <div class="relative flex-shrink-0">
+                    <img src="./farmazielonline.webp" alt="Farmacia" 
+                         class="w-32 h-32 rounded-full object-cover border-4 border-blue-200">
+                    <div class="absolute inset-0 rounded-full bg-blue-300 opacity-20 blur-md"></div>
+                    <i class="fas fa-pills absolute top-2 left-2 text-blue-500 text-3xl drop-shadow-md"></i>
+                </div>
+                <div class="ml-6">
+                    <h4 class="text-2xl font-semibold text-blue-600">
+                        <i class="fas fa-shopping-cart text-blue-500 mr-2"></i> Farmacia Online
+                    </h4>
+                    <p class="text-gray-600 mt-2">Explora nuestro catálogo completo y recibe tus medicamentos en casa o retíralos en tienda.</p>
+                </div>
+            </div>
+    
+            <!-- Tarjeta 2 - Cuidado Personal -->
+            <div class="glass-card flex items-center p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white/30 backdrop-blur-md border border-green-300">
+                <div class="relative flex-shrink-0">
+                    <img src="/cuidado.webp" alt="Bienestar" 
+                         class="w-32 h-32 rounded-full object-cover border-4 border-green-200">
+                    <div class="absolute inset-0 rounded-full bg-green-300 opacity-20 blur-md"></div>
+                    <i class="fas fa-spa absolute top-2 left-2 text-green-500 text-3xl drop-shadow-md"></i>
+                </div>
+                <div class="ml-6">
+                    <h4 class="text-2xl font-semibold text-green-600">
+                        <i class="fas fa-heart text-green-500 mr-2"></i> Cuidado Personal
+                    </h4>
+                    <p class="text-gray-600 mt-2">Cosméticos, suplementos y más para que te sientas bien por dentro y por fuera.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+    <section class="py-20 bg-lime-50 text-center">
+        <h3 class="text-4xl font-bold text-teal-700 mb-8">Testimonios</h3>
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+            <div class="glass-effect p-6 rounded-xl">
+                <p class="text-gray-600 italic">"Siempre encuentro lo que necesito y el servicio es rapidísimo."</p>
+                <p class="mt-4 font-semibold text-teal-700">- María G.</p>
+            </div>
+            <div class="glass-effect p-6 rounded-xl">
+                <p class="text-gray-600 italic">"La atención personalizada hace la diferencia. ¡Gran equipo!"</p>
+                <p class="mt-4 font-semibold text-teal-700">- Juan P.</p>
+            </div>
+            <div class="glass-effect p-6 rounded-xl">
+                <p class="text-gray-600 italic">"Me encanta la variedad de productos naturales."</p>
+                <p class="mt-4 font-semibold text-teal-700">- Ana R.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-teal-800 text-white py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Farmaziel Online</h4>
+                <p class="text-sm">Tu botica de confianza desde 2001, ahora en el mundo digital.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Enlaces</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html" class="hover:text-lime-300">Inicio</a></li>
+                    <li><a href="tienda.html" class="hover:text-lime-300">Tienda</a></li>
+                    <li><a href="https://wa.me/51918026576" class="hover:text-lime-300">Contacto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Síguenos</h4>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-lime-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="hover:text-lime-300"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-lime-300"><i class="fab fa-whatsapp text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-sm mt-8">© 2025 Farmaziel Online - Todos los derechos reservados</p>
+    </footer>
+
+       <!-- WhatsApp Flotante -->
+       <a href="https://wa.me/51918026576" class="fixed bottom-4 right-4 bg-lime-500 text-white p-4 rounded-full shadow-lg hover:bg-lime-600 transition z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+</body>
+<script>
+
+          gsap.registerPlugin(ScrollTrigger);
+        gsap.from(".glass-effect", {
+            scrollTrigger: { trigger: ".glass-effect", start: "top 80%" },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.3
+        });
+        gsap.from(".hero h2", { y: -50, opacity: 0, duration: 1, delay: 0.5 });
+        gsap.from(".hero p", { y: 50, opacity: 0, duration: 1, delay: 0.8 });
+        gsap.from(".hero a", { scale: 0.8, opacity: 0, duration: 0.8, stagger: 0.2, delay: 1 });
+</script>
+</html>

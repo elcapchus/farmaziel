@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - Farmaziel Online</title>
+    <meta name="description" content="Explora nuestra tienda online en Farmaziel: medicamentos, productos naturales y más.">
+    <meta name="keywords" content="farmacia online, medicamentos, productos naturales, tienda">
+    <script src="https://kit.fontawesome.com/0aa76cd1df.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f0f7f9, #ffffff);
+            color: #1a3c34;
+            line-height: 1.6;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+           
+        }
+        .glass-effect:hover {
+            box-shadow: 0 10px 30px rgba(0, 128, 128, 0.2);
+        
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-whatsapp:hover {
+            background: #1ebe52;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header -->
+    <header class="glass-effect py-4 px-8 flex justify-between items-center fixed top-0 w-full z-50 shadow-lg">
+        <h1 class="text-2xl font-bold text-teal-700 flex items-center">
+            <i class="fas fa-heartbeat mr-3 text-teal-500 animate-pulse"></i>Farmaziel
+        </h1>
+        <nav>
+            <ul class="flex space-x-8 text-lg font-medium">
+                <li>
+                    <a href="index.html" class="text-teal-500 hover:text-teal-700 transition-colors flex items-center">
+                        <i class="fas fa-home text-2xl md:text-base mr-2"></i> 
+                        <span class="hidden md:inline">Inicio</span>
+                    </a>
+                </li>
+                
+                     <!-- Botón del carrito -->
+                     <button id="cart-toggle" class="fixed top-0 right-4 text-teal-500 z-50 relative">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                    <!-- Carrito Responsive -->
+<div id="cart" class="fixed top-20 right-10 bg-white bg-opacity-100 p-3 rounded-lg w-96 max-w-xs sm:max-w-sm md:max-w-md lg:w-96 z-50 shadow-lg ">
+    <h4 class="text-lg font-semibold text-teal-900 dark:text-teal-600">Carrito</h4>
+    <ul id="cart-items" class="max-h-48 overflow-y-auto"></ul>
+    <p class="text-gray-600 dark:text-gray-600">Total: S/ <span id="cart-total">0.00</span></p>
+    <button id="finalize-purchase" class="mt-4 bg-teal-500 text-white px-4 py-2 rounded-full w-full hover:bg-teal-600 transition">Finalizar compra</button>
+</div>
+
+                   
+                </li>
+            </ul>
+        </nav>
+
+
+
+    </header>
+
+   
+
+    <!-- Sección Tienda -->
+    <section class="py-24 container mx-auto px-6 pt-32">
+        <h2 class="text-4xl font-bold text-teal-700 text-center mb-12">Atención Online</h2>
+        
+        <!-- Formulario de Consulta -->
+        <div class="glass-effect p-6 rounded-lg mb-12">
+            <h3 class="text-2xl font-semibold text-teal-700 mb-4">¿Qué necesitas?</h3>
+            <p class="text-gray-600 mb-4">Describe tu problema o el producto que buscas.</p>
+            <form id="consult-form">
+                <input type="text" id="product-name" class="input-field" placeholder="Nombre del producto (ej. Paracetamol)" required>
+                <textarea id="problem-desc" class="input-field" rows="4" placeholder="Describe tu problema o necesidad (ej. Dolor de cabeza persistente)" required></textarea>
+                <button type="submit" class="btn-whatsapp w-full">Enviar a WhatsApp</button>
+            </form>
+        </div>
+
+        <!-- Lista de Productos -->
+        <input type="text" id="search" class="w-full p-4 rounded-lg glass-effect mb-8" placeholder="Busca medicamentos o productos...">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12" id="product-list"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-teal-800 text-white py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Farmaziel Online</h4>
+                <p class="text-sm">Tu botica de confianza desde 2001, ahora en el mundo digital.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Enlaces</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html" class="hover:text-lime-300">Inicio</a></li>
+                    <li><a href="tienda.html" class="hover:text-lime-300">Tienda</a></li>
+                    <li><a href="index.html#contacto" class="hover:text-lime-300">Contacto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Síguenos</h4>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-lime-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="hover:text-lime-300"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="https://wa.me/51918026576" class="hover:text-lime-300"><i class="fab fa-whatsapp text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-sm mt-8">© 2025 Farmaziel Online - Todos los derechos reservados</p>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/51918026576" class="fixed bottom-4 right-4 bg-lime-500 text-white p-4 rounded-full shadow-lg hover:bg-lime-600 transition z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Carrito
+        let cart = [];
+        document.getElementById("cart-toggle").addEventListener("click", () => {
+            document.getElementById("cart").classList.toggle("hidden");
+        });
+
+        function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartCount = document.getElementById("cart-count");
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+        cartItems.innerHTML += `
+             <li class="flex justify-between items-center text-sm py-2 text-gray-600">
+                <span class="truncate flex-1">${item.name}</span>
+                <div class="flex items-center space-x-2">
+                    <button onclick="updateQuantity(${index}, -1)" class="bg-red-100 text-red-600 w-6 h-6 rounded-full hover:bg-red-200 transition">-</button>
+                    <span class="mx-2 font-medium">x${item.quantity}</span>
+                    <button onclick="updateQuantity(${index}, 1)" class="bg-green-100 text-green-600 w-6 h-6 rounded-full hover:bg-green-200 transition">+</button>
+                    <span class="ml-2 w-20 text-right">S/ ${(item.price * item.quantity).toFixed(2)}</span>
+                    <button onclick="cart.splice(${index}, 1); updateCart();" class="bg-red-500 text-white w-6მოცემულია: https://www.youtube.com/watch?v=1cW6K57MZh0&t=1s
+                    <button class="ml-4 text-red-500 hover:text-red-600">x</button>
+                </div>
+            </li>`;
+    });
+
+    document.getElementById("cart-total").textContent = total.toFixed(2);
+
+    // Actualizar el conteo en el ícono del carrito
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Sumar todas las cantidades
+    cartCount.textContent = totalItems;
+    cartCount.classList.toggle("hidden", totalItems === 0); // Mostrar u ocultar según si hay ítems
+}
+
+
+// Función para actualizar la cantidad
+function updateQuantity(index, change) {
+    if (cart[index].quantity + change > 0) { // Evitar cantidades negativas
+        cart[index].quantity += change;
+    } else {
+        cart.splice(index, 1); // Si la cantidad llega a 0, eliminar el item
+    }
+    updateCart();
+}
+
+        // Finalizar compra
+        document.getElementById("finalize-purchase").addEventListener("click", function() {
+            if (cart.length === 0) {
+                alert("El carrito está vacío. Agrega productos antes de finalizar la compra.");
+                return;
+            }
+
+            let orderDetails = "Hola, quiero finalizar mi compra:\n\nProductos:\n";
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                orderDetails += `${item.name} (x${item.quantity}) - S/ ${itemTotal.toFixed(2)}\n`;
+                total += itemTotal;
+            });
+            orderDetails += `\nTotal: S/ ${total.toFixed(2)}`;
+            orderDetails += "\n\nPor favor, coordine conmigo para verificar el pago y el envío.";
+
+            sendToWhatsApp(orderDetails);
+        });
+
+        // Manejo del formulario de consulta
+        document.getElementById("consult-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const productName = document.getElementById("product-name").value.trim();
+            const problemDesc = document.getElementById("problem-desc").value.trim();
+
+            // Validación simple
+            if (!productName || !problemDesc) {
+                alert("Por favor, completa ambos campos.");
+                return;
+            }
+
+            // Crear mensaje
+            const message = `Hola, necesito ayuda:\nProducto: ${productName}\nProblema/Descripción: ${problemDesc}`;
+
+            // Enviar a WhatsApp
+            sendToWhatsApp(message);
+        });
+
+        // Función para enviar a WhatsApp
+        function sendToWhatsApp(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/51918026576?text=${encodedMessage}`;
+            window.location.href = whatsappUrl;
+        }
+
+        // Lista de productos
+        const products = [
+            { name: "Amoxicilina + Ácido Clavulánico 500mg + 125mg Pharmagenéricos", price: 2.00, desc: "Antibiótico para infecciones bacterianas." },
+            { name: "Ácido Acetilsalicílico 100mg TAB Labot", price: 0.50, desc: "Analgésico y antipirético." },
+            { name: "Azitromicina 500mg TAB Genfar", price: 2.00, desc: "Antibiótico para infecciones respiratorias." },
+            { name: "Azitromicina 500mg TAB Vitafarma", price: 2.00, desc: "Antibiótico de amplio espectro." },
+            { name: "Atorvastatina 20mg TAB Portugal - A", price: 0.50, desc: "Reduce el colesterol." },
+            { name: "Atorvastatina 20mg TAB Portugal - B", price: 0.50, desc: "Controla los niveles de lípidos." },
+            { name: "Captopril 25mg TAB Portugal", price: 0.50, desc: "Tratamiento para hipertensión." },
+            { name: "Cetirizina 10mg TAB FarmaIndustria", price: 0.50, desc: "Antihistamínico para alergias." },
+            { name: "Ciprofloxacino 500mg TAB FarmaIndustria", price: 0.50, desc: "Antibiótico para infecciones." },
+            { name: "Clorfenamina Maleato 4mg TAB Portugal", price: 0.50, desc: "Alivia síntomas de alergia." },
+            { name: "Dexametasona 4mg TAB LaboFar", price: 0.50, desc: "Antiinflamatorio y corticosteroide." },
+            { name: "Diclofenaco 50mg TAB Portugal", price: 0.50, desc: "Analgésico y antiinflamatorio." },
+            { name: "Diclofenaco 100mg TAB Genfar", price: 1.00, desc: "Alivia dolor e inflamación." },
+            { name: "Doxiciclina 100mg CAP Portugal", price: 1.00, desc: "Antibiótico para infecciones." },
+            { name: "Dicloxacilina 500mg CAP Portugal", price: 0.50, desc: "Antibiótico para infecciones de piel." },
+            { name: "Esomeprazol 40mg TAB Bonapharm", price: 1.80, desc: "Reduce la acidez estomacal." },
+            { name: "Fenazopiridina 100mg TAB Portugal", price: 0.50, desc: "Alivia dolor urinario." },
+            { name: "Fluconazol 150mg CAP Portugal", price: 1.00, desc: "Antifúngico para infecciones." },
+            { name: "Loperamida 2mg TAB Portugal", price: 0.50, desc: "Antidiarreico." },
+            { name: "Losartán por Blister 50mg TAB LaboFar - A", price: 3.00, desc: "Controla la hipertensión." },
+            { name: "Losartán por Blister 50mg TAB LaboFar - B", price: 3.00, desc: "Tratamiento para presión arterial." },
+            { name: "Metronidazol 500mg TAB Portugal", price: 0.50, desc: "Antibiótico y antiparasitario." },
+            { name: "Metformina Clorhidrato 850mg (POR BLISTER) TAB Portugal", price: 2.00, desc: "Controla la diabetes." },
+            { name: "Ácido Fólico 0.5mg IQFARMA", price: 0.50, desc: "Suplemento vitamínico." },
+            { name: "Meloxicam 15mg TAB Portugal", price: 0.50, desc: "Antiinflamatorio para dolor." },
+            { name: "Naproxeno Sódico 550mg TAB Portugal", price: 0.50, desc: "Alivia dolor e inflamación." },
+            { name: "Orfenadrina 100mg TAB AC", price: 1.00, desc: "Relajante muscular." },
+            { name: "Omeprazol 20mg CAP Portugal", price: 0.50, desc: "Protector gástrico." },
+            { name: "Paracetamol 500mg TAB Genfar", price: 0.50, desc: "Analgésico y antipirético." },
+            { name: "Paracetamol 500mg TAB Portugal", price: 0.50, desc: "Alivia dolores leves." },
+            { name: "Simeticona 80mg TAB-Masticable IQFarma", price: 0.80, desc: "Alivia gases y distensión." },
+            { name: "Albendazol 200mg TAB-Masticable IQFarma", price: 0.50, desc: "Antiparasitario." },
+            { name: "Amoxicilina + Ácido Clavulánico 250mg+62.5mg/5ml JARABE Portugal", price: 15.00, desc: "Antibiótico en jarabe." },
+            { name: "Ambroxol 30mg/5ml JARABE Portugal", price: 10.00, desc: "Expectorante para tos." },
+            { name: "Ambroxol Pediátrico 15mg/5ml JARABE Portugal", price: 8.00, desc: "Expectorante para niños." },
+            { name: "Albendazol 100mg/5ml SUS-ORAL Genfar", price: 5.00, desc: "Antiparasitario en suspensión." },
+            { name: "Metamizol Sódico 500mg/ml GOTAS Portugal", price: 8.00, desc: "Analgésico en gotas." },
+            { name: "Simeticona 80mg/mL SUS-ORAL IQFarma", price: 8.00, desc: "Alivia gases en suspensión." },
+            { name: "Furazolidona 50mg/5mL SUS-ORAL Portugal", price: 10.00, desc: "Antibacteriano intestinal." },
+            { name: "Dextrometorfano 15mg/5mL JARABE Portugal", price: 10.00, desc: "Antitusivo para tos seca." },
+            { name: "Lactulosa 3.3g/5ml 180ml JARABE AC", price: 13.00, desc: "Laxante para estreñimiento." },
+            { name: "Sulfametoxazol + Trimetoprima 400mg/80mg/5ml JARABE Portugal", price: 10.00, desc: "Antibiótico en jarabe." },
+            { name: "Sulfametoxazol + Trimetoprima + Sulfoguayacolato Potásico NF JARABE Portugal", price: 15.00, desc: "Antibiótico y expectorante." },
+            { name: "Sulfacid Forte - Sulfametoxazol + Trimetoprima 800mg+160mg", price: 2.00, desc: "Antibiótico de alta potencia." },
+            { name: "Alerliv - Levocetirizina 5mg TAB", price: 1.50, desc: "Antihistamínico para alergias." },
+            { name: "Relafex Plus - Paracetamol+Clorzoxazona 300/250mg", price: 2.00, desc: "Relajante muscular y analgésico." },
+            { name: "Bonacoxib - Etoricoxib 120mg", price: 3.50, desc: "Antiinflamatorio para dolor." },
+            { name: "Bonacoxib - Etoricoxib 90mg", price: 2.50, desc: "Alivia inflamación y dolor." },
+            { name: "Neoalergine Plus - Cetirizina Clorhidrato 10mg", price: 1.50, desc: "Antialérgico." },
+            { name: "Alercheck Plus 10mg Cetirizina Clorhidrato CAPBLAN", price: 1.50, desc: "Alivia síntomas de alergia." },
+            { name: "Plidocheck Plus 400mg Ibuprofeno CAPBLAN", price: 1.00, desc: "Analgésico y antiinflamatorio." },
+            { name: "Naxodol 550mg Naproxeno Sódico TAB", price: 1.50, desc: "Alivia dolor e inflamación." },
+            { name: "Sulphytrim Junior (Sulfametoxazol 200mg+Trimetoprima 40mg)/5mL", price: 15.00, desc: "Antibiótico pediátrico." },
+            { name: "Trimexasol Pediátrico (Sulfametoxazol 200mg+Trimetoprima 40mg)/5mL", price: 15.00, desc: "Antibiótico para niños." },
+            { name: "Descongest NF JARABE 60ml", price: 15.00, desc: "Descongestionante nasal." },
+            { name: "Rexaler - Levocetirizina JARABE 60ml", price: 15.00, desc: "Antialérgico en jarabe." },
+            { name: "Dimens - Loratadina 5mg/5ml JARABE 120ml", price: 18.00, desc: "Antihistamínico para alergias." },
+            { name: "Alergilab - Levocetirizina 2.5mg/5mg JARABE 60ml", price: 20.00, desc: "Alivia alergias en jarabe." },
+            { name: "Bismosan - Bismuto JARABE 150mL", price: 15.00, desc: "Protector gástrico." },
+            { name: "Dolo Neuropress Forte TAB", price: 2.00, desc: "Analgésico para dolores fuertes." },
+            { name: "Kids Niños Paracetamol 160mg/5mL JARABE", price: 10.00, desc: "Analgésico pediátrico." },
+            { name: "Gastroral - Magaldrato+Simeticona JARABE 200ml", price: 24.00, desc: "Alivia acidez y gases." },
+            { name: "CreciMaxPlus - Calcio Vita-D Mag Zinc 180mL Kids", price: 28.00, desc: "Suplemento para niños." },
+            { name: "Acetilcisteína 600mg SOBRES LaboGen", price: 2.00, desc: "Mucolítico para tos." },
+            { name: "Dermagen CREMA 20g", price: 15.00, desc: "Tratamiento para hongos y alergias." },
+            { name: "Hiruflam Forte CREMA 20g", price: 18.00, desc: "Alivia moretones y golpes." },
+            { name: "Betapluss 0.05% CREMA", price: 10.00, desc: "Antiinflamatorio para alergias." },
+            { name: "Neomicina Sulfato+Bacitracina Cinc UNGUENTO 15g", price: 12.00, desc: "Antibiótico tópico." },
+            { name: "Diclofenaco 1% GEL", price: 8.50, desc: "Analgésico para golpes." },
+            { name: "Sulfanil 1% CREMA - Sulfadiazina de Plata 50g", price: 18.00, desc: "Tratamiento para quemaduras." },
+            { name: "Xilocaina - Lidocaína Clorhidrato 2% 30g", price: 18.00, desc: "Anestésico tópico." },
+            { name: "Clorfenamina Maleato 2ml/5mL UNITOMA", price: 1.00, desc: "Antialérgico en jarabe." },
+            { name: "BroncoButol Plus - Salbutamol 2mg+Ambroxol 7.5mg/5mL UNITOMA", price: 1.50, desc: "Broncodilatador y expectorante." },
+            { name: "EnteroPhar Forte - Furazolidona 50mg/5mL UNITOMA", price: 1.00, desc: "Antibacteriano intestinal." },
+            { name: "BroncoPhar Plus UNITOMA", price: 1.00, desc: "Alivia problemas respiratorios." },
+            { name: "Drokse 3 INYECTABLE", price: 24.00, desc: "Medicamento inyectable." },
+            { name: "Higanatur - Silimarina+Complejo B CAP", price: 2.00, desc: "Protector hepático." },
+            { name: "Higanatur Max Forte CAP", price: 3.00, desc: "Suplemento hepático avanzado." },
+            { name: "Higaril B Compuesto", price: 1.50, desc: "Complejo vitamínico." },
+            { name: "Vaselina Reuter con/sin perfume 18g", price: 2.50, desc: "Hidratante para piel." },
+            { name: "Vaselina Reuter con/sin perfume 5g", price: 1.50, desc: "Hidratante portátil." },
+            { name: "Vitamina E 400UI CAP PharmaGenéricos", price: 1.00, desc: "Antioxidante." },
+            { name: "Vitamina E 400UI CAP Marfan", price: 8.00, desc: "Suplemento vitamínico." },
+            { name: "Gloranta CARAMELOS", price: 2.50, desc: "Caramelos refrescantes." },
+            { name: "Magnesol 2g", price: 1.00, desc: "Suplemento de magnesio." },
+            { name: "Garcinia Cambogia y L-Carnitina Komasi SOBRE", price: 3.50, desc: "Apoyo para pérdida de peso." },
+            { name: "Tapsin Plus SOBRES", price: 2.50, desc: "Alivia síntomas de resfrío." },
+            { name: "Gastroral - Magaldrato 800mg+Simeticona 40mg MASTICABLE", price: 1.50, desc: "Alivia acidez y gases." },
+            { name: "NonGripp", price: 1.00, desc: "Antigripal." },
+            { name: "Citrato de Magnesio Kids 300g", price: 50.00, desc: "Suplemento para niños." },
+            { name: "Repriman 50ml - Metamizol Sódico 250mg/5mL JARABE", price: 15.00, desc: "Analgésico en jarabe." },
+            { name: "Repriman 10ml GOTAS", price: 14.00, desc: "Analgésico en gotas." },
+            { name: "Levonorgestrel 0.75 TAB AR", price: 10.00, desc: "Anticonceptivo de emergencia." },
+            { name: "Sildex 100mg TAB - Sildenafilo", price: 5.00, desc: "Tratamiento para disfunción eréctil." },
+            { name: "Sildenafilo 50mg TAB MARFAN", price: 2.50, desc: "Mejora la función eréctil." },
+            { name: "AeroFit - Simeticona 80mg/mL GOTAS SUS-ORAL", price: 13.00, desc: "Alivia gases en gotas." },
+            { name: "FramyCort GOTAS", price: 13.00, desc: "Antiinflamatorio en gotas." },
+            { name: "Otidol 5mL GOTAS", price: 15.00, desc: "Alivia dolor de oído." },
+            { name: "Floril 15mL GOTAS", price: 12.00, desc: "Suplemento en gotas." },
+            { name: "Piel Sentivo", price: 4.50, desc: "Condón con textura." },
+            { name: "Amikacina 500mg/2mL INYECTABLE Medifarma", price: 8.00, desc: "Antibiótico inyectable." },
+            { name: "Dexacortil 4mg/2ml INYECTABLE", price: 9.50, desc: "Corticosteroide inyectable." },
+            { name: "Jeringa 5ml", price: 0.50, desc: "Jeringa desechable." },
+            { name: "Gents Clasico", price: 4.50, desc: "Condón clásico." },
+            { name: "Piel con Aros - CONDÓN", price: 4.50, desc: "Condón con textura." },
+            { name: "Piel Clasico - CONDÓN", price: 4.50, desc: "Condón estándar." },
+            { name: "Piel Con Retardante - CONDÓN", price: 5.00, desc: "Condón con efecto retardante." },
+            { name: "Aguja 23Gx1", price: 0.20, desc: "Aguja para inyecciones." },
+            { name: "Jeringa 3ml", price: 0.50, desc: "Jeringa pequeña." },
+            { name: "Enzygestivo TAB Sherfarma", price: 2.00, desc: "Digestivo enzimático." },
+            { name: "Cobavit-12 1mL INYECTABLE", price: 24.30, desc: "Vitamina B12 inyectable." },
+            { name: "Bukcito CARAMELO", price: 1.00, desc: "Caramelo refrescante." },
+            { name: "Buk Fresa Rojo Caramelo", price: 1.00, desc: "Caramelo sabor fresa." },
+            { name: "Gasa Esteril 5x5 GASAS", price: 1.50, desc: "Gasa estéril para curaciones." },
+            { name: "Gasa Esteril 7x5 GASAS", price: 1.80, desc: "Gasa para heridas." },
+            { name: "Gasa Esteril 10x10 GASAS", price: 2.50, desc: "Gasa grande estéril." },
+            { name: "Alkhofar CURITAS", price: 0.20, desc: "Curitas para cortes pequeños." },
+            { name: "Xonacef IM - Ceftriaxona 1g INYECTABLE", price: 18.00, desc: "Antibiótico inyectable." },
+            { name: "Ceftriaxona 1g INYECTABLE DANY", price: 6.00, desc: "Antibiótico de amplio espectro." },
+            { name: "Ceftribac 1g - Ceftriaxona 1g DANY", price: 10.00, desc: "Antibiótico inyectable." },
+            { name: "LincoMAX - Lincomicina 600mg/2ml INYECTABLE DANY", price: 14.50, desc: "Antibiótico inyectable." },
+            { name: "GentaBiot - Gentamicina 160mg/2mL INYECTABLE DANY", price: 10.00, desc: "Antibiótico para infecciones." },
+            { name: "Bencilpenicilina Procaínica 1 000 000 UI INYECTABLE DANNY", price: 7.00, desc: "Antibiótico inyectable." },
+            { name: "Ketoprofeno 100mg/2mL INYECTABLE GENFAR", price: 6.00, desc: "Analgésico inyectable." },
+            { name: "Dexametasona Fosfato 4mg/2mL INYECTABLE DIPHASAC", price: 2.50, desc: "Corticosteroide inyectable." },
+            { name: "Metamizol Sódico 1g/2mL INYECTABLE DIPHASAC", price: 2.50, desc: "Analgésico inyectable." },
+            { name: "Orfenadrina Citrato 60mg/2mL INYECTABLE OTARVASQ", price: 6.00, desc: "Relajante muscular inyectable." },
+            { name: "Orflexdan - Orfenadrina Citrato 60mg/2mL INYECTABLE DANY", price: 6.00, desc: "Relajante muscular." },
+            { name: "Cefradina 500mg", price: 1.50, desc: "Antibiótico para infecciones." },
+            { name: "Diclofenaco Sódico 75mg/3mL INYECTABLE", price: 2.00, desc: "Antiinflamatorio inyectable." },
+            { name: "Diclofenaco 75mg/3mL INYECTABLE LABOT", price: 2.00, desc: "Analgésico inyectable." },
+            { name: "Jeringa 20ml", price: 1.00, desc: "Jeringa desechable grande." },
+            { name: "Jeringa 10ml", price: 0.50, desc: "Jeringa mediana." },
+            { name: "Llave Triple Vía con Extensión", price: 3.50, desc: "Accesorio para venoclisis." },
+            { name: "Cateter 22", price: 3.50, desc: "Catéter para administración IV." },
+            { name: "Cateter 20", price: 3.50, desc: "Catéter médico." },
+            { name: "Cateter 24", price: 3.50, desc: "Catéter pequeño." },
+            { name: "Aguja 21x1/2", price: 0.20, desc: "Aguja para inyecciones." },
+            { name: "Alita 21x3/4", price: 1.50, desc: "Aguja con alas." },
+            { name: "Alita 22x3/4", price: 1.50, desc: "Aguja con alas." },
+            { name: "Equipo de Venoclisis", price: 2.50, desc: "Equipo para administración IV." },
+            { name: "Venda 3x5", price: 2.00, desc: "Venda para curaciones." },
+            { name: "Venda 2x5", price: 1.50, desc: "Venda pequeña." },
+            { name: "Frasco de Orina", price: 1.50, desc: "Recipiente para muestras." },
+            { name: "Frasco de Heces", price: 1.50, desc: "Recipiente para análisis." },
+            { name: "Equipo Volutrol", price: 3.50, desc: "Equipo para control de fluidos." },
+            { name: "Piel con Espuelas", price: 4.50, desc: "Condón con textura." },
+            { name: "Gents Espuelas", price: 4.50, desc: "Condón con espuelas." },
+            { name: "Gents AROS", price: 4.50, desc: "Condón con aros." },
+            { name: "UNION VIT C", price: 20.00, desc: "Suplemento de vitamina C." },
+            { name: "Gynomax NF", price: 6.00, desc: "Tratamiento vaginal." },
+            { name: "Ginothyl - Policresuleno 90mg OVULO", price: 10.00, desc: "Tratamiento ginecológico." },
+            { name: "Metronidazol 500mg Portugal", price: 2.50, desc: "Antiparasitario." },
+            { name: "Coenzima Q10 - VENTA POR CAJA", price: 45.00, desc: "Suplemento antioxidante." },
+            { name: "Floratil 250mg", price: 3.50, desc: "Probiótico intestinal." },
+            { name: "Digermin PLUS", price: 5.00, desc: "Suplemento digestivo." },
+            { name: "Bonaflora 250mg", price: 3.50, desc: "Probiótico para flora intestinal." },
+            { name: "Doctor FLU - Antigripal", price: 1.50, desc: "Alivia síntomas de gripe." },
+            { name: "Ferrem - Vitamina para Anemia", price: 38.00, desc: "Suplemento para anemia." },
+            { name: "Cloruro de Sodio frasco x 250mL", price: 5.00, desc: "Solución salina." },
+            { name: "Salbutamol 10mcg/Dosis 200 dosis INHALADOR", price: 10.00, desc: "Broncodilatador." },
+            { name: "Ferroviton - Hierro Sucrosa 100mg/5mL INYECTABLE", price: 10.00, desc: "Suplemento de hierro." },
+            { name: "B-VatForte - B1 B2 B3 B5 B6 B12 INYECTABLE", price: 28.00, desc: "Complejo B inyectable." },
+            { name: "B-Vat - B1 B2 B3 B5 B6 B7 B12 INYECTABLE", price: 24.00, desc: "Vitaminas B inyectables." },
+            { name: "Cholo2 - Injektopas sl INYECTABLE", price: 24.00, desc: "Protector hepático inyectable." },
+            { name: "ReforCe - Ácido Ascórbico 7.5g/50mL INYECTABLE", price: 85.00, desc: "Vitamina C inyectable." },
+            { name: "Ciruelax Forte - Laxante", price: 1.50, desc: "Laxante natural." },
+            { name: "Vitamina E 400UI FinaVida", price: 35.00, desc: "Antioxidante premium." },
+            { name: "Folic Acid 800mg FinaVida", price: 35.00, desc: "Suplemento de ácido fólico." },
+            { name: "Biotin Complex FinaVida", price: 45.00, desc: "Suplemento para cabello y piel." },
+            { name: "Vivactiv Magnesio", price: 20.00, desc: "Suplemento de magnesio." },
+            { name: "Vivactiv Complejo B", price: 20.00, desc: "Complejo vitamínico B." },
+            { name: "Vivactiv Energy", price: 20.00, desc: "Suplemento energético." },
+            { name: "UNICOLAGEN PLUS 320g", price: 40.00, desc: "Colágeno para articulaciones." },
+            { name: "Vinagre de Manzana - L-Carnitina", price: 18.00, desc: "Apoyo para pérdida de peso." },
+            { name: "Vinagre de Sidra de Manzana", price: 15.00, desc: "Suplemento digestivo." },
+            { name: "Clorfenamina 10mg Inyectable LABOT", price: 3.00, desc: "Antialérgico inyectable." },
+            { name: "Nastizol Forte TAB", price: 1.50, desc: "Descongestionante." }
+        ];
+
+   // Variable para rastrear cuántos productos se han mostrado
+let displayedCount = 0;
+const itemsPerLoad = 6; // Cantidad de productos por carga
+
+function normalizeText(text) {
+    return text
+        .toLowerCase()
+        .normalize("NFD") // Descompone caracteres con tildes
+        .replace(/[\u0300-\u036f]/g, ""); // Elimina los acentos
+}
+
+function displayProducts(productsToShow) {
+    const productList = document.getElementById("product-list");
+    // Mostrar solo los productos hasta el límite actual
+    const productsToDisplay = productsToShow.slice(0, displayedCount + itemsPerLoad);
+    
+    productList.innerHTML = "";
+    productsToDisplay.forEach(product => {
+        productList.innerHTML += `
+            <div class="glass-effect p-6 rounded-lg">
+                <h3 class="text-xl font-semibold text-teal-700">${product.name}</h3>
+                <p class="text-gray-600">${product.desc}</p>
+                <p class="text-lg font-bold text-teal-500">S/ ${product.price.toFixed(2)}</p>
+                <button onclick='addToCart("${product.name}", ${product.price})' class="mt-4 bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 transition">Agregar al carrito</button>
+            </div>`;
+    });
+
+    // Añadir botón "Cargar más" si hay más productos por mostrar
+    if (productsToDisplay.length < productsToShow.length) {
+        productList.innerHTML += `
+            <div class="text-center mt-8">
+                <button id="load-more" class="bg-teal-500 text-white px-6 py-3 rounded-full hover:bg-teal-600 transition">Cargar más</button>
+            </div>`;
+        
+        // Evento para el botón "Cargar más"
+        document.getElementById("load-more").addEventListener("click", () => {
+            displayedCount += itemsPerLoad;
+            displayProducts(productsToShow);
+        });
+    }
+}
+
+// Buscador que ignora tildes y mayúsculas/minúsculas
+document.getElementById("search").addEventListener("input", function(e) {
+    const searchTerm = normalizeText(e.target.value);
+    displayedCount = 0; // Reiniciar al buscar
+    
+    const filteredProducts = products.filter(product => {
+        const normalizedName = normalizeText(product.name);
+        const normalizedDesc = normalizeText(product.desc);
+        return normalizedName.includes(searchTerm) || normalizedDesc.includes(searchTerm);
+    });
+    
+    displayProducts(filteredProducts);
+});
+
+// Mostrar productos iniciales
+displayedCount = 0; // Asegurarse de empezar desde 0
+displayProducts(products);
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCart();
+        }
+
+        // Búsqueda de productos
+        document.getElementById("search").addEventListener("input", function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.desc.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        });
+
+
+
+
+
+
+        // Mostrar productos iniciales
+        displayProducts(products);
+    </script>
+</body>
+</html>
